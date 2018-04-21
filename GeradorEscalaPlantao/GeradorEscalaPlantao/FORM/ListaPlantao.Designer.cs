@@ -31,6 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dtgPlantoes = new System.Windows.Forms.DataGridView();
             this.btnGerar = new System.Windows.Forms.Button();
+            this.btnCadastrarFuncionario = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgPlantoes)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +55,7 @@
             // 
             // btnGerar
             // 
-            this.btnGerar.Location = new System.Drawing.Point(157, 391);
+            this.btnGerar.Location = new System.Drawing.Point(68, 395);
             this.btnGerar.Name = "btnGerar";
             this.btnGerar.Size = new System.Drawing.Size(75, 23);
             this.btnGerar.TabIndex = 1;
@@ -62,11 +63,22 @@
             this.btnGerar.UseVisualStyleBackColor = true;
             this.btnGerar.Click += new System.EventHandler(this.btnGerar_Click);
             // 
+            // btnCadastrarFuncionario
+            // 
+            this.btnCadastrarFuncionario.Location = new System.Drawing.Point(220, 394);
+            this.btnCadastrarFuncionario.Name = "btnCadastrarFuncionario";
+            this.btnCadastrarFuncionario.Size = new System.Drawing.Size(119, 23);
+            this.btnCadastrarFuncionario.TabIndex = 2;
+            this.btnCadastrarFuncionario.Text = "Cadastrar Funcionario";
+            this.btnCadastrarFuncionario.UseVisualStyleBackColor = true;
+            this.btnCadastrarFuncionario.Click += new System.EventHandler(this.btnCadastrarFuncionario_Click);
+            // 
             // ListaPlantao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(377, 430);
+            this.Controls.Add(this.btnCadastrarFuncionario);
             this.Controls.Add(this.btnGerar);
             this.Controls.Add(this.groupBox1);
             this.Name = "ListaPlantao";
@@ -82,5 +94,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dtgPlantoes;
         private System.Windows.Forms.Button btnGerar;
+        private System.Windows.Forms.Button btnCadastrarFuncionario;
     }
 }

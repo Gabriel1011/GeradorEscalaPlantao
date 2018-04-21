@@ -21,5 +21,10 @@ namespace GeradorEscalaPlantao.FORM
         {
             dtgPlantoes.DataSource = new BLL.Escala().GerarPlatao();
         }
+
+        private void btnCadastrarFuncionario_Click(object sender, EventArgs e)
+        {
+            new FORM.CadastroFuncionario().Show();
+        }
     }
 }
