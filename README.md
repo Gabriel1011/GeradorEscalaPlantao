@@ -1,0 +1,2 @@
+# GeradorEscalaPlantao
+GeradorEscalaPlantao
