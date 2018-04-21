@@ -10,5 +10,7 @@ namespace GeradorEscalaPlantao.ENT
     {
         public string Nome { get; set; }
         public decimal Ordem { get; set; }
+        public DateTime? InicioFerias { get; set; }
+        public DateTime? Fimferias { get; set; }
     }
 }
