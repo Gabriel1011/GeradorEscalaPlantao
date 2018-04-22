@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BLL\Escala.cs" />
     <Compile Include="DAO\FakeRepositorio.cs" />
+    <Compile Include="DAO\Repositorio.cs" />
     <Compile Include="ENT\Funcionario.cs" />
     <Compile Include="ENT\Plantao.cs" />
     <Compile Include="Form1.cs">

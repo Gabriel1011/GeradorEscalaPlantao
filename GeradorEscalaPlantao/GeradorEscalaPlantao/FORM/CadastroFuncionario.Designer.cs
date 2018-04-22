@@ -29,21 +29,23 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnSalvar = new System.Windows.Forms.Button();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numOrdem = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.mskInicioFerias = new System.Windows.Forms.MaskedTextBox();
+            this.btnRemover = new System.Windows.Forms.Button();
             this.mskFimFerias = new System.Windows.Forms.MaskedTextBox();
+            this.mskInicioFerias = new System.Windows.Forms.MaskedTextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numOrdem = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtNome = new System.Windows.Forms.TextBox();
+            this.btnSalvar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dtgFuncionario = new System.Windows.Forms.DataGridView();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Orderm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InicioFerias = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FimFerias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEditar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numOrdem)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -52,6 +54,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnEditar);
+            this.groupBox1.Controls.Add(this.btnRemover);
             this.groupBox1.Controls.Add(this.mskFimFerias);
             this.groupBox1.Controls.Add(this.mskInicioFerias);
             this.groupBox1.Controls.Add(this.label4);
@@ -67,65 +71,24 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // btnSalvar
+            // btnRemover
             // 
-            this.btnSalvar.Location = new System.Drawing.Point(292, 48);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(75, 23);
-            this.btnSalvar.TabIndex = 0;
-            this.btnSalvar.Text = "Salvar";
-            this.btnSalvar.UseVisualStyleBackColor = true;
-            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            this.btnRemover.Location = new System.Drawing.Point(359, 61);
+            this.btnRemover.Name = "btnRemover";
+            this.btnRemover.Size = new System.Drawing.Size(63, 23);
+            this.btnRemover.TabIndex = 9;
+            this.btnRemover.Text = "Remover";
+            this.btnRemover.UseVisualStyleBackColor = true;
+            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
             // 
-            // txtNome
+            // mskFimFerias
             // 
-            this.txtNome.Location = new System.Drawing.Point(50, 13);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(159, 20);
-            this.txtNome.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Nome:";
-            // 
-            // numOrdem
-            // 
-            this.numOrdem.Location = new System.Drawing.Point(263, 17);
-            this.numOrdem.Name = "numOrdem";
-            this.numOrdem.Size = new System.Drawing.Size(32, 20);
-            this.numOrdem.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(216, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Ordem:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Início Férias:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(156, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Fim Férias:";
+            this.mskFimFerias.Location = new System.Drawing.Point(219, 50);
+            this.mskFimFerias.Mask = "00/00/0000";
+            this.mskFimFerias.Name = "mskFimFerias";
+            this.mskFimFerias.Size = new System.Drawing.Size(67, 20);
+            this.mskFimFerias.TabIndex = 8;
+            this.mskFimFerias.ValidatingType = typeof(System.DateTime);
             // 
             // mskInicioFerias
             // 
@@ -136,14 +99,65 @@
             this.mskInicioFerias.TabIndex = 7;
             this.mskInicioFerias.ValidatingType = typeof(System.DateTime);
             // 
-            // mskFimFerias
+            // label4
             // 
-            this.mskFimFerias.Location = new System.Drawing.Point(219, 50);
-            this.mskFimFerias.Mask = "00/00/0000";
-            this.mskFimFerias.Name = "mskFimFerias";
-            this.mskFimFerias.Size = new System.Drawing.Size(67, 20);
-            this.mskFimFerias.TabIndex = 8;
-            this.mskFimFerias.ValidatingType = typeof(System.DateTime);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(156, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Fim Férias:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(68, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Início Férias:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(216, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Ordem:";
+            // 
+            // numOrdem
+            // 
+            this.numOrdem.Location = new System.Drawing.Point(263, 17);
+            this.numOrdem.Name = "numOrdem";
+            this.numOrdem.Size = new System.Drawing.Size(32, 20);
+            this.numOrdem.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Nome:";
+            // 
+            // txtNome
+            // 
+            this.txtNome.Location = new System.Drawing.Point(50, 13);
+            this.txtNome.Name = "txtNome";
+            this.txtNome.Size = new System.Drawing.Size(159, 20);
+            this.txtNome.TabIndex = 1;
+            // 
+            // btnSalvar
+            // 
+            this.btnSalvar.Location = new System.Drawing.Point(358, 11);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(64, 23);
+            this.btnSalvar.TabIndex = 0;
+            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // groupBox2
             // 
@@ -158,6 +172,7 @@
             // 
             this.dtgFuncionario.AllowUserToAddRows = false;
             this.dtgFuncionario.AllowUserToDeleteRows = false;
+            this.dtgFuncionario.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dtgFuncionario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgFuncionario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Nome,
@@ -167,8 +182,10 @@
             this.dtgFuncionario.Location = new System.Drawing.Point(9, 19);
             this.dtgFuncionario.Name = "dtgFuncionario";
             this.dtgFuncionario.ReadOnly = true;
+            this.dtgFuncionario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgFuncionario.Size = new System.Drawing.Size(416, 310);
             this.dtgFuncionario.TabIndex = 0;
+            this.dtgFuncionario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgFuncionario_CellClick);
             // 
             // Nome
             // 
@@ -176,6 +193,7 @@
             this.Nome.HeaderText = "Nome";
             this.Nome.Name = "Nome";
             this.Nome.ReadOnly = true;
+            this.Nome.Width = 60;
             // 
             // Orderm
             // 
@@ -183,6 +201,7 @@
             this.Orderm.HeaderText = "Orderm";
             this.Orderm.Name = "Orderm";
             this.Orderm.ReadOnly = true;
+            this.Orderm.Width = 66;
             // 
             // InicioFerias
             // 
@@ -190,6 +209,7 @@
             this.InicioFerias.HeaderText = "Início Férias";
             this.InicioFerias.Name = "InicioFerias";
             this.InicioFerias.ReadOnly = true;
+            this.InicioFerias.Width = 90;
             // 
             // FimFerias
             // 
@@ -197,6 +217,17 @@
             this.FimFerias.HeaderText = "Fim Férias";
             this.FimFerias.Name = "FimFerias";
             this.FimFerias.ReadOnly = true;
+            this.FimFerias.Width = 79;
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.Location = new System.Drawing.Point(359, 36);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(63, 23);
+            this.btnEditar.TabIndex = 10;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // CadastroFuncionario
             // 
@@ -235,5 +266,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Orderm;
         private System.Windows.Forms.DataGridViewTextBoxColumn InicioFerias;
         private System.Windows.Forms.DataGridViewTextBoxColumn FimFerias;
+        private System.Windows.Forms.Button btnRemover;
+        private System.Windows.Forms.Button btnEditar;
     }
 }

@@ -15,6 +15,7 @@ namespace GeradorEscalaPlantao.FORM
     public partial class CadastroFuncionario : Form
     {
         List<ENT.Funcionario> Funcionarios = new List<ENT.Funcionario>();
+        ENT.Funcionario funcionario = new ENT.Funcionario();
 
         public CadastroFuncionario()
         {
@@ -23,9 +24,11 @@ namespace GeradorEscalaPlantao.FORM
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            XmlSerializer xml = new XmlSerializer(typeof(List<ENT.Funcionario>));
+            SalvarFuncionario();
+        }
 
-
+        private void SalvarFuncionario()
+        {
             Funcionarios.Add(new ENT.Funcionario()
             {
                 Nome = txtNome.Text.Trim().ToUpper(),
@@ -34,13 +37,16 @@ namespace GeradorEscalaPlantao.FORM
                 Fimferias = Convert.ToDateTime(mskFimFerias.Text)
             });
 
-            using (FileStream fs = new FileStream(@"C:\teste\Funcionarios.xml", FileMode.Create, FileAccess.Write))
-            {
-                xml.Serialize(fs, Funcionarios);
-            }
+            GravarXml();
+            funcionario = null;
+        }
+
+        private void GravarXml()
+        {
+            new DAO.Repositorio().GerarXmlFuncionarios(Funcionarios);
 
             dtgFuncionario.DataSource = new List<ENT.Funcionario>();
-            dtgFuncionario.DataSource = Funcionarios;
+            dtgFuncionario.DataSource = Funcionarios.OrderBy(o => o.Ordem).ToList();
             dtgFuncionario.Refresh();
         }
 
@@ -52,7 +58,44 @@ namespace GeradorEscalaPlantao.FORM
                 Funcionarios = xml.Deserialize(fs) as List<ENT.Funcionario>;
             }
 
-            dtgFuncionario.DataSource = Funcionarios;
+            dtgFuncionario.DataSource = Funcionarios.OrderBy(o => o.Ordem).ToList();
+        }
+
+        private void btnRemover_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow funcionario in dtgFuncionario.SelectedRows)
+            {
+                Funcionarios.Remove(Funcionarios.Where(p => p.Nome == Convert.ToString(funcionario.Cells["Nome"].Value)).FirstOrDefault());
+            }
+
+            GravarXml();
+        }
+
+        private void dtgFuncionario_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                funcionario = Funcionarios.Where(p => p.Nome == Convert.ToString(dtgFuncionario.Rows[e.RowIndex].Cells["Nome"].Value)).FirstOrDefault();
+
+                txtNome.Text = funcionario.Nome;
+                numOrdem.Value = funcionario.Ordem;
+                mskInicioFerias.Text = funcionario.InicioFerias.ToString();
+                mskFimFerias.Text = funcionario.Fimferias.ToString();
+            }
+        }
+
+        public void RemoverFuncionario()
+        {
+            if (funcionario != null)
+            {
+                Funcionarios.Remove(funcionario);
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            RemoverFuncionario();
+            SalvarFuncionario();
         }
     }
 }

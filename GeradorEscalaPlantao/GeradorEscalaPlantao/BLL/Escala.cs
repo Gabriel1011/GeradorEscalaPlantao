@@ -10,7 +10,7 @@ namespace GeradorEscalaPlantao.BLL
     {
         public List<ENT.Plantao> GerarPlatao()
         {
-            var Funcionarios = new DAO.FakeRepositorio().GerarListaFuncionario().OrderBy(o => o.Ordem).ToList();
+            var Funcionarios = new DAO.Repositorio().GerarListaFuncionario().OrderBy(o => o.Ordem).ToList();
             var platoes = new List<ENT.Plantao>();
             var diasAno = GerarDiasDoAno(DateTime.Now.Year);
             var todasSegundas = diasAno.Where(p => p.DayOfWeek == DayOfWeek.Monday);
@@ -19,6 +19,9 @@ namespace GeradorEscalaPlantao.BLL
             var cont = 0;//Funcionarios.Count();
             foreach (var segunda in todasSegundas)
             {
+                if (Funcionarios[cont].InicioFerias >= segunda && Funcionarios[cont].Fimferias <= segunda)
+                    cont++;
+
                 platoes.Add(new ENT.Plantao()
                 {
                     InicioPlantao = segunda,
@@ -35,7 +38,7 @@ namespace GeradorEscalaPlantao.BLL
                 plantao.FimPlantao = todosDomingos.Where(p => p == plantao.InicioPlantao.AddDays(6)).FirstOrDefault();
             }
 
-            return platoes; 
+            return platoes;
         }
 
         public List<DateTime> GerarDiasDoAno(int ano)
