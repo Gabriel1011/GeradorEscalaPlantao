@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeradorEscalaPlantao.Utilitarios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,11 @@ namespace GeradorEscalaPlantao.FORM
         private void btnCadastrarFuncionario_Click(object sender, EventArgs e)
         {
             new FORM.CadastroFuncionario().Show();
+        }
+
+        private void ListaPlantao_Load(object sender, EventArgs e)
+        {
+            Aquivo.GerarArquivosGeradorEscala();
         }
     }
 }

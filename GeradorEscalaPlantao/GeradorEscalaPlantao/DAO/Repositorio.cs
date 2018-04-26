@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeradorEscalaPlantao.Utilitarios;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace GeradorEscalaPlantao.DAO
         {
             var Funcionarios = new List<ENT.Funcionario>();
             XmlSerializer xml = new XmlSerializer(typeof(List<ENT.Funcionario>));
-            using (FileStream fs = new FileStream(@"C:\teste\Funcionarios.xml", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(Aquivo.CaminhoBase, FileMode.Open, FileAccess.Read))
             {
                 Funcionarios = xml.Deserialize(fs) as List<ENT.Funcionario>;
             }
@@ -26,7 +27,7 @@ namespace GeradorEscalaPlantao.DAO
         {
             XmlSerializer xml = new XmlSerializer(typeof(List<ENT.Funcionario>));
 
-            using (FileStream fs = new FileStream(@"C:\teste\Funcionarios.xml", FileMode.Create, FileAccess.Write))
+            using (FileStream fs = new FileStream(Aquivo.CaminhoBase, FileMode.Create, FileAccess.Write))
             {
                 xml.Serialize(fs, Funcionarios);
             }

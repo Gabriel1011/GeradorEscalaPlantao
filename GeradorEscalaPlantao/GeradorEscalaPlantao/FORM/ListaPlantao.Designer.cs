@@ -83,6 +83,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "ListaPlantao";
             this.Text = "ListaPlantao";
+            this.Load += new System.EventHandler(this.ListaPlantao_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgPlantoes)).EndInit();
             this.ResumeLayout(false);

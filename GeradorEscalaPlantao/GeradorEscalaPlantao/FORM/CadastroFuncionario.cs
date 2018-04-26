@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeradorEscalaPlantao.Utilitarios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -52,11 +53,12 @@ namespace GeradorEscalaPlantao.FORM
 
         private void CadastroFuncionario_Load(object sender, EventArgs e)
         {
-            XmlSerializer xml = new XmlSerializer(typeof(List<ENT.Funcionario>));
-            using (FileStream fs = new FileStream(@"C:\teste\Funcionarios.xml", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(Aquivo.CaminhoBase, FileMode.Open, FileAccess.Read))
             {
+                XmlSerializer xml = new XmlSerializer(typeof(List<ENT.Funcionario>));
                 Funcionarios = xml.Deserialize(fs) as List<ENT.Funcionario>;
             }
+
 
             dtgFuncionario.DataSource = Funcionarios.OrderBy(o => o.Ordem).ToList();
         }
