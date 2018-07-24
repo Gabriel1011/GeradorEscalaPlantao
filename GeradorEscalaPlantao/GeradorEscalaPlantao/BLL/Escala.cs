@@ -19,8 +19,11 @@ namespace GeradorEscalaPlantao.BLL
             var cont = 0;//Funcionarios.Count();
             foreach (var segunda in todasSegundas)
             {
-                if (Funcionarios[cont].InicioFerias >= segunda && Funcionarios[cont].Fimferias <= segunda)
+                if (Funcionarios[cont].InicioFerias <= segunda && Funcionarios[cont].Fimferias >= segunda)
                     cont++;
+
+                if (cont == Funcionarios.Count())
+                    cont = 0;
 
                 platoes.Add(new ENT.Plantao()
                 {
