@@ -1,4 +1,5 @@
 ﻿using GeradorEscalaPlantao.FORM;
+using GeradorEscalaPlantao.Utilitarios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,9 @@ namespace GeradorEscalaPlantao
         [STAThread]
         static void Main()
         {
+            Aquivo.GerarArquivosGeradorEscala();
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetCompatibleTextRenderingDefault(false);            
             Application.Run(new ListaPlantao());
         }
     }

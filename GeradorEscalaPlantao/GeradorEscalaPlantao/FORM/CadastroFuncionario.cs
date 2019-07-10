@@ -1,4 +1,7 @@
-﻿using GeradorEscalaPlantao.Utilitarios;
+﻿using GeradorEscalaPlantao.Entidades;
+using GeradorEscalaPlantao.Repositorios;
+using GeradorEscalaPlantao.Utilitarios;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,8 +18,8 @@ namespace GeradorEscalaPlantao.FORM
 {
     public partial class CadastroFuncionario : Form
     {
-        List<ENT.Funcionario> Funcionarios = new List<ENT.Funcionario>();
-        ENT.Funcionario funcionario = new ENT.Funcionario();
+        List<Funcionario> Funcionarios = new List<Funcionario>();
+        Funcionario funcionario = new Funcionario();
 
         public CadastroFuncionario()
         {
@@ -25,12 +28,39 @@ namespace GeradorEscalaPlantao.FORM
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            SalvarFuncionario();
+            try
+            {
+                ValidarCampos();
+                SalvarFuncionario();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void ValidarCampos()
+        {
+            var noficacoes = new List<string>();
+            DateTime inicio = new DateTime();
+            DateTime fim = new DateTime();
+
+            if (String.IsNullOrWhiteSpace(txtNome.Text))
+                noficacoes.Add("Nome obrigatório");
+            if (Convert.ToInt32(numOrdem.Value) > 0)
+                noficacoes.Add("A ordem deve ser maior que 1");
+            if (!DateTime.TryParse(mskInicioFerias.Text, out inicio) || !DateTime.TryParse(mskFimFerias.Text, out fim))
+                noficacoes.Add("A data de início e fim deve ser uma data válida");
+            if (fim > inicio)
+                noficacoes.Add("A data fim deve ser maior do que a data de início");
+
+            if (noficacoes.Any())
+                throw new Exception("Erros: " + noficacoes.Aggregate((A, B) => A + "," + B) + ".");
         }
 
         private void SalvarFuncionario()
         {
-            Funcionarios.Add(new ENT.Funcionario()
+            Funcionarios.Add(new Funcionario()
             {
                 Nome = txtNome.Text.Trim().ToUpper(),
                 Ordem = numOrdem.Value,
@@ -38,27 +68,27 @@ namespace GeradorEscalaPlantao.FORM
                 Fimferias = Convert.ToDateTime(mskFimFerias.Text)
             });
 
-            GravarXml();
+            GravarJson();
             funcionario = null;
         }
 
-        private void GravarXml()
+        private void GravarJson()
         {
-            new DAO.Repositorio().GerarXmlFuncionarios(Funcionarios);
+            new Repositorio().GerarJsonFuncionarios(Funcionarios);
 
-            dtgFuncionario.DataSource = new List<ENT.Funcionario>();
+            dtgFuncionario.DataSource = new List<Funcionario>();
             dtgFuncionario.DataSource = Funcionarios.OrderBy(o => o.Ordem).ToList();
             dtgFuncionario.Refresh();
         }
 
         private void CadastroFuncionario_Load(object sender, EventArgs e)
         {
-            using (FileStream fs = new FileStream(Aquivo.CaminhoBase, FileMode.Open, FileAccess.Read))
+            using (StreamReader fs = new StreamReader(new FileStream(Aquivo.CaminhoBase, FileMode.Open, FileAccess.Read)))
             {
-                XmlSerializer xml = new XmlSerializer(typeof(List<ENT.Funcionario>));
-                Funcionarios = xml.Deserialize(fs) as List<ENT.Funcionario>;
+                //XmlSerializer xml = new XmlSerializer(typeof(List<Funcionario>));
+                //Funcionarios = xml.Deserialize(fs) as List<Funcionario>;
+                Funcionarios = JsonConvert.DeserializeObject<List<Funcionario>>(Convert.ToString(fs.ReadToEnd()));
             }
-
 
             dtgFuncionario.DataSource = Funcionarios.OrderBy(o => o.Ordem).ToList();
         }
@@ -69,8 +99,7 @@ namespace GeradorEscalaPlantao.FORM
             {
                 Funcionarios.Remove(Funcionarios.Where(p => p.Nome == Convert.ToString(funcionario.Cells["Nome"].Value)).FirstOrDefault());
             }
-
-            GravarXml();
+            GravarJson();
         }
 
         private void dtgFuncionario_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -80,7 +109,7 @@ namespace GeradorEscalaPlantao.FORM
                 funcionario = Funcionarios.Where(p => p.Nome == Convert.ToString(dtgFuncionario.Rows[e.RowIndex].Cells["Nome"].Value)).FirstOrDefault();
 
                 txtNome.Text = funcionario.Nome;
-                numOrdem.Value = funcionario.Ordem;
+                numOrdem.Value = Convert.ToInt32(funcionario.Ordem);
                 mskInicioFerias.Text = funcionario.InicioFerias.ToString();
                 mskFimFerias.Text = funcionario.Fimferias.ToString();
             }
@@ -89,9 +118,7 @@ namespace GeradorEscalaPlantao.FORM
         public void RemoverFuncionario()
         {
             if (funcionario != null)
-            {
                 Funcionarios.Remove(funcionario);
-            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)

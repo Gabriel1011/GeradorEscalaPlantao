@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeradorEscalaPlantao.ENT
+namespace GeradorEscalaPlantao.Entidades
 {
     public class Plantao
     {

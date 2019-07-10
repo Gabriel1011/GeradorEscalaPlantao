@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GeradorEscalaPlantao.Servicos;
 
 namespace GeradorEscalaPlantao.BLL.Tests
 {
@@ -14,7 +15,7 @@ namespace GeradorEscalaPlantao.BLL.Tests
         [TestMethod()]
         public void GerarPlataoTest()
         {
-            new BLL.Escala().GerarPlatao();
+            new Escala().GerarPlatao();
             Assert.Fail();
         }
     }

@@ -13,16 +13,17 @@ namespace GeradorEscalaPlantao.Utilitarios
 
         public static void GerarArquivosGeradorEscala()
         {
-            if(!Directory.Exists(@"C:\GeradorEscala"))
+            try
             {
-                try
-                {
+                if (!Directory.Exists(@"C:\GeradorEscala"))
                     Directory.CreateDirectory(@"C:\GeradorEscala");
-                }
-                catch (Exception ex)
-                {
 
-                }
+                if (!File.Exists(CaminhoBase))
+                    new Repositorios.Repositorio().GerarJsonFuncionarios(new List<Entidades.Funcionario>());
+            }
+            catch (Exception ex)
+            {
+
             }
         }
     }

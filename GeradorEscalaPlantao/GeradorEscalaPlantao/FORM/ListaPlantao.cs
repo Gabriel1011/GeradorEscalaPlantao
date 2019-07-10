@@ -1,4 +1,5 @@
-﻿using GeradorEscalaPlantao.Utilitarios;
+﻿using GeradorEscalaPlantao.Servicos;
+using GeradorEscalaPlantao.Utilitarios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace GeradorEscalaPlantao.FORM
 
         private void btnGerar_Click(object sender, EventArgs e)
         {
-            dtgPlantoes.DataSource = new BLL.Escala().GerarPlatao();
+            dtgPlantoes.DataSource = new Escala().GerarPlatao();
         }
 
         private void btnCadastrarFuncionario_Click(object sender, EventArgs e)
